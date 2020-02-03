@@ -52,3 +52,8 @@ h1 {
 .calendar {
   background-color: yellow;
 }
+
+/* toggles */
+.red {
+  color: red;
+}
