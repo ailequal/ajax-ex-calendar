@@ -1,7 +1,7 @@
 // code
 $(document).ready(function() {
 
-  // api
+  // ajax call for holidays api
   $.ajax({
     url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=5",
     method: "GET",
@@ -20,13 +20,12 @@ $(document).ready(function() {
 
 
   // moment.js
-  var january = moment("01-01-2018", "DD-MM-YYYY");
+  var january = moment("2018-01-01", "YYYY-MM-DD").locale('it');
   for (var i = 0; i < 31; i++) {
     var day = january.format("dddd DD MMMM")
-
     // handlebars template
     var context = {
-      day: day,
+      'day' : day
     };
     var html = template(context);
     $('.calendar ul').append(html);
