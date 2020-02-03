@@ -6,11 +6,49 @@
 }
 
 body {
+  min-width: 576px;
   font-family: sans-serif;
   font-size: 16px;
 }
 
 /* main */
 h1 {
+  margin: 20px;
   text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  width: 70%;
+  margin:  20px auto;
+  background-color: lightblue;
+}
+
+.status-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.status-bar .button {
+  margin: 0 auto 0 20px;
+}
+
+.status-bar .button span {
+  cursor: pointer;
+}
+
+.status-bar .info {
+  margin: 0 20px 0 0;
+}
+
+.status-bar span {
+  display: inline-block;
+  padding: 10px;
+  font-size: 30px;
+}
+
+.calendar {
+  background-color: yellow;
 }

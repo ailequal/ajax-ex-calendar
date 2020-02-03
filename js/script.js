@@ -1,17 +1,37 @@
+// code
 $(document).ready(function() {
 
-  console.log('hello world');
+  // api
+  $.ajax({
+    url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
+    method: "GET",
+    success: function(data, state) {
+      console.log(data);
+    },
+    error: function(request, state, error) {
+      console.log(error);
+    }
+  });
 
+
+  // handlebars
   var source = $('#template').html();
   var template = Handlebars.compile(source);
-
   var context = {
-    subtitle: "hello world",
+    day: "first day",
   };
   var html = template(context);
-  $('body').append(html);
+  $('.calendar').append(html);
 
-  var date = moment().format('MMMM Do YYYY, h:mm:ss a');
-  console.log(date);
+
+  // moment.js
+  var date1 = moment().format('MMMM Do YYYY, h:mm:ss a');
+  console.log(date1);
+  var date2 = moment();
+  console.log(date2);
+  var date3 = moment("21-02-1993", "DD-MM-YYYY");
+  console.log(date3.format());
+  var date4 = moment();
+  console.log(date4.month());
 
 });

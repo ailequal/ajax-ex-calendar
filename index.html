@@ -12,10 +12,23 @@
 </head>
 <body>
   <h1>ajax-ex-calendar</h1>
-  <script id="template" type="text/x-handlebars-template">
-    <div class="entry">
-      <h2>{{subtitle}}</h2>
+
+  <div class="container">
+    <div class="status-bar">
+      <div class="button">
+        <span class="previous">&lt</span> <span class="next">&gt;</span>
+      </div>
+      <div class="info">
+        <span class="month">Mese</span> <span>/</span> <span class="year">2018</span>
+      </div>
     </div>
+    <div class="calendar">
+      <p>calendar list here</p>
+    </div>
+  </div>
+
+  <script id="template" type="text/x-handlebars-template">
+    <li>{{day}}</li>
   </script>
   <script src="js/script.js" charset="utf-8"></script>
 </body>
