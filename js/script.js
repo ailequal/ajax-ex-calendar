@@ -6,76 +6,44 @@ $(document).ready(function() {
   var template = Handlebars.compile(source);
 
 
-  // ajax call for holidays api
-  $.ajax({
-    url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
-    method: "GET",
-    success: function(data, state) {
-      // moment.js
-      var january = moment("2018-01-01", "YYYY-MM-DD").locale('it');
-      var monthHolidays = data.response;
-      console.log(monthHolidays);
-      console.log(january);
-      for (var i = 0; i < 31; i++) {
-        var day = january.format("dddd DD MMMM");
-        // handlebars template
-        var context = {
-          'day' : day
-        };
-        var html = template(context);
-        $('.calendar ul').append(html);
-        if (scanDate(monthHolidays, january)) {
-          $('.calendar ul li:last-child').addClass('red');
-          console.log('if');
-          console.log(monthHolidays[i].date);
-          console.log(january._i);
-        }
-        // add a day to the month
-        january.add(1, 'day');
-        // test
-      }
-    },
-    error: function(request, state, error) {
-      console.log(error);
-    }
-  });
+  // moment.js
+  var january = moment("2018-01-01", "YYYY-MM-DD").locale('it');
+  console.log(january);
+  for (var i = 0; i < 31; i++) {
+    var day = january.format("dddd DD MMMM");
+    var dayElement = january.format("YYYY-MM-DD");
+    // handlebars template
+    var context = {
+      'day' : day,
+      'data-element' : dayElement
+    };
+    var html = template(context);
+    $('.calendar ul').append(html);
+    january.add(1, 'day');
+  };
+
 
   // function
-  // scan an array with objects .date and an object .date
-  function scanDate(array, object) {
-    var i = 0;
-    while (i < array.length) {
-      var arrayDate = array[i].date;
-      var objectDate = object._i;
-      if (arrayDate === objectDate) {
-        return true;
+  // add red to holidays
+  function addRed(month) {
+    $.ajax({
+      url: "https://flynn.boolean.careers/exercises/api/holidays",
+      method: "GET",
+      data: {
+        'year' : 2018,
+        'month' : month
+      },
+      success: function(data, state) {
+        console.log(data.response);
+      },
+      error: function(request, state, error) {
+        console.log(error);
       }
-      i++;
-    }
-    return false;
+    });
   }
 
   // test
-  var array = [
-    {
-      'date' : '2020-01-01'
-    },
-    {
-      'date' : '2020-03-01'
-    },
-    {
-      'date' : '2020-05-01'
-    },
-    {
-      'date' : '2020-01-20'
-    }
-  ];
-
-  var object = {
-    '_i' : '2020-01-200'
-  }
-
-  console.log(scanDate(array, object));
+  var december = addRed(11);
 
 });
 
