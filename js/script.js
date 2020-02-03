@@ -3,10 +3,10 @@ $(document).ready(function() {
 
   // api
   $.ajax({
-    url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
+    url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=5",
     method: "GET",
     success: function(data, state) {
-      console.log(data);
+      // console.log(data.response[0]);
     },
     error: function(request, state, error) {
       console.log(error);
@@ -14,24 +14,28 @@ $(document).ready(function() {
   });
 
 
-  // handlebars
+  // handlebars init
   var source = $('#template').html();
   var template = Handlebars.compile(source);
-  var context = {
-    day: "first day",
-  };
-  var html = template(context);
-  $('.calendar').append(html);
 
 
   // moment.js
-  var date1 = moment().format('MMMM Do YYYY, h:mm:ss a');
-  console.log(date1);
-  var date2 = moment();
-  console.log(date2);
-  var date3 = moment("21-02-1993", "DD-MM-YYYY");
-  console.log(date3.format());
-  var date4 = moment();
-  console.log(date4.month());
+  var january = moment("01-01-2018", "DD-MM-YYYY");
+  for (var i = 0; i < 31; i++) {
+    var day = january.format("dddd DD MMMM")
+
+    // handlebars template
+    var context = {
+      day: day,
+    };
+    var html = template(context);
+    $('.calendar ul').append(html);
+
+    january.add(1, 'day');
+  }
 
 });
+
+
+// bugs
+// how to set date in italian?
