@@ -98,7 +98,7 @@ $(document).ready(function() {
             // if data-element matches add it and make it red
             if (dataElement == arrayElement) {
               $(this).addClass('red');
-              $(this).append(' - ' + arrayName);
+              $(this).append('<span>' + arrayName + '</span>');
             }
           });
         }

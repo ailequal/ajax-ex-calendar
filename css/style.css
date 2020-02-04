@@ -61,16 +61,31 @@ h1 {
   align-items: center;
   padding: 10px;
   background-color: #2bcbba;
+  font-size: 20px;
   color: #ffffff;
 }
 
 .days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 20px;
   padding: 20px;
   border-radius: 0 0 20px 20px;
   background-color: #d1d8e0;
 }
 
+.days .day {
+  justify-self: center;
+  font-size: 26px;
+}
+
+.days .day span {
+  display: block;
+  font-size: 14px;
+}
+
 /* toggles */
 .red {
+  text-align: center;
   color: red;
 }
