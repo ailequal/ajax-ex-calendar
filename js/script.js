@@ -1,45 +1,63 @@
 // code
 $(document).ready(function() {
 
+  // date
+  var year = 2018
+  var month = 0;
+  var day = 1;
+
+  // print first month and add holidays
+  printMonth(month);
+  addHolidays(month);
+
   // show previous month when clicking previous
   $(document).on('click', '.previous', function() {
-    console.log('previous');
+    previousMonth()
   });
 
   // show next month when clicking next
   $(document).on('click', '.next', function() {
-    console.log('next');
+    nextMonth();
   });
-
-  // date
-  var year = 2018
-  var month = 2;
-  var day = 1;
-  var date = moment({
-    'year' : year,
-    'month' : month,
-    'day' : day
-  });
-  date.locale('it');
-  var days = date.daysInMonth();
-
-  printMonth(month);
-
-  addHolidays(month);
 
   // function
   // show next month
   function nextMonth() {
-    // code
+    month++;
+    if (month > 11) {
+      alert('Sei arrivato alla fine del calendario.');
+      month = 11;
+    } else {
+      printMonth(month);
+      addHolidays(month);
+    }
   }
 
   // show previous month
   function previousMonth() {
-    // code
+    month--;
+    if (month < 0) {
+      alert('Non sono presenti mesi antecedenti a gennaio.');
+      month = 0;
+    } else {
+      printMonth(month);
+      addHolidays(month);
+    }
   }
 
   // print the days of the month
   function printMonth(month) {
+    // date
+    var date = moment({
+      'year' : year,
+      'month' : month,
+      'day' : day
+    });
+    date.locale('it');
+    // days inside that specific month
+    var days = date.daysInMonth();
+    // clear everything inside the .calendar
+    $('.calendar ul').text('');
     for (var i = 1; i <= days; i++) {
       var dateYMD = date.format("YYYY-MM" + '-' + addZero(i));
       // handlebars
