@@ -1,19 +1,25 @@
 // code
 $(document).ready(function() {
 
-  // handlebars init
-  var source = $('#template').html();
-  var template = Handlebars.compile(source);
+  // show previous month when clicking previous
+  $(document).on('click', '.previous', function() {
+    console.log('previous');
+  });
 
+  // show next month when clicking next
+  $(document).on('click', '.next', function() {
+    console.log('next');
+  });
 
   // moment.js
-  // january
   var january = moment("2018-01-01", "YYYY-MM-DD").locale('it');
   // scan all the month
   for (var i = 0; i < 31; i++) {
     var day = january.format("dddd DD MMMM");
     var dayElement = january.format("YYYY-MM-DD");
-    // handlebars template
+    // handlebars
+    var source = $('#template').html();
+    var template = Handlebars.compile(source);
     var context = {
       'day' : day,
       'data-element' : dayElement
@@ -24,14 +30,23 @@ $(document).ready(function() {
     january.add(1, 'day');
   };
 
-
   // test
-  var month = addRed(0);
+  var month = addHolidays(0);
 
 
   // function
-  // add red to holidays for the selected month
-  function addRed(month) {
+  // show next month
+  function nextMonth() {
+    // code
+  }
+
+  // show previous month
+  function previousMonth() {
+    // code
+  }
+
+  // add holidays for the selected month and make them red
+  function addHolidays(month) {
     $.ajax({
       url: "https://flynn.boolean.careers/exercises/api/holidays",
       method: "GET",
