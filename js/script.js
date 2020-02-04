@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
   // date
-  var year = 2018
+  var year = 2018;
   var month = 0;
   var day = 1;
 
@@ -12,7 +12,7 @@ $(document).ready(function() {
 
   // show previous month when clicking previous
   $(document).on('click', '.previous', function() {
-    previousMonth()
+    previousMonth();
   });
 
   // show next month when clicking next
@@ -58,7 +58,7 @@ $(document).ready(function() {
     // days inside that specific month
     var days = date.daysInMonth();
     // clear everything inside the .calendar
-    $('.calendar ul').text('');
+    $('.calendar .days').text('');
     for (var i = 1; i <= days; i++) {
       var dateYMD = date.format("YYYY-MM" + '-' + addZero(i));
       // handlebars
@@ -70,7 +70,7 @@ $(document).ready(function() {
       };
       var html = template(context);
       // add the day to the html
-      $('.calendar ul').append(html);
+      $('.calendar .days').append(html);
       // add monthName to the html
       $('.month').text(monthName);
     }
@@ -91,7 +91,7 @@ $(document).ready(function() {
         // scan the array
         for (var i = 0; i < array.length; i++) {
           // scan every day inside the html
-          $('.calendar ul li').each(function() {
+          $('.calendar .day').each(function() {
             var dataElement = $(this).attr('data-element');
             var arrayElement = array[i].date;
             var arrayName = array[i].name;

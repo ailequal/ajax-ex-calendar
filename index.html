@@ -23,14 +23,37 @@
       </div>
     </div>
     <div class="calendar">
-      <ul>
-        <!-- list item -->
-      </ul>
+      <div class="days-name">
+        <div class="day">
+          <span>LUN</span>
+        </div>
+        <div class="day">
+          <span>MAR</span>
+        </div>
+        <div class="day">
+          <span>MER</span>
+        </div>
+        <div class="day">
+          <span>GIO</span>
+        </div>
+        <div class="day">
+          <span>VEN</span>
+        </div>
+        <div class="day">
+          <span>SAB</span>
+        </div>
+        <div class="day">
+          <span>DOM</span>
+        </div>
+      </div>
+      <div class="days">
+        <!-- div.day -->
+      </div>
     </div>
   </div>
 
   <script id="template" type="text/x-handlebars-template">
-    <li data-element='{{data-element}}'>{{day}}</li>
+    <div class="day" data-element='{{data-element}}'>{{day}}</div>
   </script>
   <script src="js/script.js" charset="utf-8"></script>
 </body>
