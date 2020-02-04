@@ -54,6 +54,7 @@ $(document).ready(function() {
       'day' : day
     });
     date.locale('it');
+    var monthName = (date.format('MMMM').charAt(0).toUpperCase() + date.format('MMMM').slice(1));
     // days inside that specific month
     var days = date.daysInMonth();
     // clear everything inside the .calendar
@@ -70,6 +71,8 @@ $(document).ready(function() {
       var html = template(context);
       // add the day to the html
       $('.calendar ul').append(html);
+      // add monthName to the html
+      $('.month').text(monthName);
     }
   }
 
