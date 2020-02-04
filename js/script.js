@@ -11,28 +11,30 @@ $(document).ready(function() {
     console.log('next');
   });
 
-  // moment.js
-  var january = moment("2018-01-01", "YYYY-MM-DD").locale('it');
-  // scan all the month
-  for (var i = 0; i < 31; i++) {
-    var day = january.format("dddd DD MMMM");
-    var dayElement = january.format("YYYY-MM-DD");
+  // date
+  var year = 2018
+  var month = 0;
+  var day = 1;
+  var date = moment({
+    'year' : year,
+    'month' : month,
+    'day' : day
+  });
+
+  // cycle through all days inside the month
+  for (var i = 1; i <= 31; i++) {
+    var dateYMD = date.format("YYYY-MM" + '-' + addZero(i));
     // handlebars
     var source = $('#template').html();
     var template = Handlebars.compile(source);
     var context = {
-      'day' : day,
-      'data-element' : dayElement
+      'day' : i,
+      'data-element' : dateYMD
     };
     var html = template(context);
     // add the day to the html
     $('.calendar ul').append(html);
-    january.add(1, 'day');
-  };
-
-  // test
-  var month = addHolidays(0);
-
+  }
 
   // function
   // show next month
@@ -45,39 +47,13 @@ $(document).ready(function() {
     // code
   }
 
-  // add holidays for the selected month and make them red
-  function addHolidays(month) {
-    $.ajax({
-      url: "https://flynn.boolean.careers/exercises/api/holidays",
-      method: "GET",
-      data: {
-        'year' : 2018,
-        'month' : month
-      },
-      success: function(data, state) {
-        // array with holiday objects
-        var array = data.response;
-        // scan the array
-        for (var i = 0; i < array.length; i++) {
-          // scan every day inside the html
-          $('.calendar ul li').each(function() {
-            var dataElement = $(this).attr('data-element');
-            var arrayElement = array[i].date;
-            // if data-element match add red
-            if (dataElement == arrayElement) {
-              $(this).addClass('red');
-            }
-          });
-        }
-      },
-      error: function(request, state, error) {
-        console.log(error);
-      }
-    });
+  // add a zero to a number that is < 10
+  function addZero(number) {
+    if (number < 10) {
+      return '0' + number;
+    } else {
+      return number;
+    }
   }
 
 });
-
-
-// bugs
-// make the code dynamic for all months
