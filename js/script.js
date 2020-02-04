@@ -13,28 +13,17 @@ $(document).ready(function() {
 
   // date
   var year = 2018
-  var month = 0;
+  var month = 2;
   var day = 1;
   var date = moment({
     'year' : year,
     'month' : month,
     'day' : day
-  }).locale('it');
+  });
+  date.locale('it');
+  var days = date.daysInMonth();
 
-  // cycle through all days inside the month
-  for (var i = 1; i <= 31; i++) {
-    var dateYMD = date.format("YYYY-MM" + '-' + addZero(i));
-    // handlebars
-    var source = $('#template').html();
-    var template = Handlebars.compile(source);
-    var context = {
-      'day' : i,
-      'data-element' : dateYMD
-    };
-    var html = template(context);
-    // add the day to the html
-    $('.calendar ul').append(html);
-  }
+  printMonth(month);
 
   addHolidays(month);
 
@@ -47,6 +36,23 @@ $(document).ready(function() {
   // show previous month
   function previousMonth() {
     // code
+  }
+
+  // print the days of the month
+  function printMonth(month) {
+    for (var i = 1; i <= days; i++) {
+      var dateYMD = date.format("YYYY-MM" + '-' + addZero(i));
+      // handlebars
+      var source = $('#template').html();
+      var template = Handlebars.compile(source);
+      var context = {
+        'day' : i,
+        'data-element' : dateYMD
+      };
+      var html = template(context);
+      // add the day to the html
+      $('.calendar ul').append(html);
+    }
   }
 
   // add holidays for the selected month and make them red
