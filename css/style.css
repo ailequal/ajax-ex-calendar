@@ -52,7 +52,8 @@ h1 {
 }
 
 .days-name {
-  display: flex;
+  display: none;
+  /* display: flex; */
   justify-content: space-around;
   align-items: center;
   padding: 10px;
@@ -65,18 +66,20 @@ h1 {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 20px;
-  padding: 20px;
+  padding: 20px 0 5px 0;
   border-radius: 0 0 20px 20px;
   background-color: #d1d8e0;
 }
 
 .days .day {
   justify-self: center;
+  height: 60px;
   font-size: 26px;
 }
 
 .days .day span {
   display: block;
+  margin: 5px 0 0 0;
   font-size: 14px;
 }
 
@@ -85,3 +88,6 @@ h1 {
   text-align: center;
   color: red;
 }
+
+/* bugs */
+/* .days-name should be dynamic with the start of the selected month */
